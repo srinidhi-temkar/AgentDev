@@ -78,8 +78,10 @@ parser.add_argument('--task', type=str, default="Develop a basic Gomoku game.",
                     help="Prompt of software")
 parser.add_argument('--name', type=str, default="Gomoku",
                     help="Name of software, your software will be generated in WareHouse/name_org_timestamp")
-parser.add_argument('--model', type=str, default="CUSTOM_MODEL",
-                    help="GPT Model, choose from {'GPT_3_5_TURBO', 'GPT_4', 'GPT_4_TURBO', 'GPT_4O', 'GPT_4O_MINI', 'CUSTOM_MODEL'}")
+parser.add_argument('--model', type=str, default="CUSTOM_BASE_MODEL",
+                    help="GPT Model, choose from {'GPT_3_5_TURBO', 'GPT_4', 'GPT_4_TURBO', 'GPT_4O', 'GPT_4O_MINI', 'CUSTOM_BASE_MODEL'}")
+parser.add_argument('--model', type=str, default="CUSTOM_FT_MODEL",
+                    help="GPT Model, choose from {'GPT_3_5_TURBO', 'GPT_4', 'GPT_4_TURBO', 'GPT_4O', 'GPT_4O_MINI', 'CUSTOM_FT_MODEL'}")
 parser.add_argument('--path', type=str, default="",
                     help="Your file directory, ChatDev will build upon your software in the Incremental mode")
 args = parser.parse_args()
@@ -97,7 +99,8 @@ args2type = {'GPT_3_5_TURBO': ModelType.GPT_3_5_TURBO,
             #  'GPT_4_TURBO_V': ModelType.GPT_4_TURBO_V
             'GPT_4O': ModelType.GPT_4O,
             'GPT_4O_MINI': ModelType.GPT_4O_MINI,
-            'CUSTOM_MODEL': ModelType.CUSTOM_MODEL
+            'CUSTOM_BASE_MODEL': ModelType.CUSTOM_BASE_MODEL,
+            'CUSTOM_FT_MODEL': ModelType.CUSTOM_FT_MODEL,
              }
 if openai_new_api:
     args2type['GPT_3_5_TURBO'] = ModelType.GPT_3_5_TURBO_NEW
