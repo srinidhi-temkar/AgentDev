@@ -36,12 +36,6 @@ except ImportError:
 import os
 
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
-if 'BASE_BASE_URL' in os.environ:
-    BASE_URL = os.environ['BASE_BASE_URL']
-elif 'FT_BASE_URL' in os.environ:
-    BASE_URL = os.environ['FT_BASE_URL']
-else:
-    BASE_URL = None
 
 
 class ModelBackend(ABC):
@@ -71,6 +65,7 @@ class OpenAIModel(ModelBackend):
         self.model_config_dict = model_config_dict
 
     def run(self, *args, **kwargs):
+        BASE_URL = os.environ[kwargs["base_url_name"]]
         string = "\n".join([message["content"] for message in kwargs["messages"]])
         # encoding = tiktoken.encoding_for_model(self.model_type.value)
         encoding = tiktoken.get_encoding("cl100k_base")
