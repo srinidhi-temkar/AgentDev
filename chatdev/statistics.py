@@ -19,8 +19,8 @@ def prompt_cost(model_type: str, num_prompt_tokens: float, num_completion_tokens
         "gpt-4-turbo": 0.01,
         "gpt-4o": 0.005,
         "gpt-4o-mini": 0.00015,
-        os.getenv("BASE_MODEL_NAME"): float(os.getenv("BASE_MODEL_COST")),
-        os.getenv("FT_MODEL_NAME"): float(os.getenv("FT_MODEL_COST")),
+        os.getenv("BASE_MODEL_NAME"): float(os.getenv("MODEL_COST")),
+        os.getenv("FT_MODEL_NAME"): float(os.getenv("MODEL_COST")),
     }
 
     output_cost_map = {
@@ -34,8 +34,8 @@ def prompt_cost(model_type: str, num_prompt_tokens: float, num_completion_tokens
         "gpt-4-turbo": 0.03,
         "gpt-4o": 0.015,
         "gpt-4o-mini": 0.0006,
-        os.getenv("BASE_MODEL_NAME"): float(os.getenv("BASE_MODEL_COST")),
-        os.getenv("FT_MODEL_NAME"): float(os.getenv("FT_MODEL_COST")),
+        os.getenv("BASE_MODEL_NAME"): float(os.getenv("MODEL_COST")),
+        os.getenv("FT_MODEL_NAME"): float(os.getenv("MODEL_COST")),
     }
 
     if model_type not in input_cost_map or model_type not in output_cost_map:

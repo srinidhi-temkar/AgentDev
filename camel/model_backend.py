@@ -96,8 +96,8 @@ class OpenAIModel(ModelBackend):
                 "gpt-4-turbo": 100000,
                 "gpt-4o": 4096, #100000
                 "gpt-4o-mini": 16384, #100000,
-                os.getenv("BASE_MODEL_NAME"): int(os.getenv("BASE_MODEL_OUTPUT_TOKENS")),
-                os.getenv("FT_MODEL_NAME"): int(os.getenv("FT_MODEL_OUTPUT_TOKENS")),
+                os.getenv("BASE_MODEL_NAME"): int(os.getenv("MODEL_OUTPUT_TOKENS")),
+                os.getenv("FT_MODEL_NAME"): int(os.getenv("MODEL_OUTPUT_TOKENS")),
             }
             num_max_token = num_max_token_map[self.model_type.value]
             num_max_completion_tokens = num_max_token - num_prompt_tokens
@@ -131,8 +131,8 @@ class OpenAIModel(ModelBackend):
                 "gpt-4-turbo": 100000,
                 "gpt-4o": 4096, #100000
                 "gpt-4o-mini": 16384, #100000,
-                os.getenv("BASE_MODEL_NAME"): int(os.getenv("BASE_MODEL_OUTPUT_TOKENS")),
-                os.getenv("FT_MODEL_NAME"): int(os.getenv("FT_MODEL_OUTPUT_TOKENS")),
+                os.getenv("BASE_MODEL_NAME"): int(os.getenv("MODEL_OUTPUT_TOKENS")),
+                os.getenv("FT_MODEL_NAME"): int(os.getenv("MODEL_OUTPUT_TOKENS")),
             }
             num_max_token = num_max_token_map[self.model_type.value]
             num_max_completion_tokens = num_max_token - num_prompt_tokens
