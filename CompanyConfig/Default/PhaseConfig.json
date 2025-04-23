@@ -1,7 +1,7 @@
 {
   "DemandAnalysis": {
-    "assistant_role_name": "Chief Product Officer",
-    "user_role_name": "Chief Executive Officer",
+    "assistant_role_name": "Product Manager",
+    "user_role_name": "Team Lead",
     "phase_prompt": [
       "ChatDev has made products in the following form before:",
       "Image: can present information in line chart, bar chart, flow chart, cloud chart, Gantt chart, etc.",
@@ -18,8 +18,8 @@
     ]
   },
   "LanguageChoose": {
-    "assistant_role_name": "Chief Technology Officer",
-    "user_role_name": "Chief Executive Officer",
+    "assistant_role_name": "Team Lead",
+    "user_role_name": "Product Manager",
     "phase_prompt": [
       "According to the new user's task and some creative brainstorm ideas listed below: ",
       "Task: \"{task}\".",
@@ -32,7 +32,7 @@
   },
   "Coding": {
     "assistant_role_name": "Programmer",
-    "user_role_name": "Chief Technology Officer",
+    "user_role_name": "Team Lead",
     "phase_prompt": [
       "According to the new user's task and our software designs listed below: ",
       "Task: \"{task}\".",
@@ -57,7 +57,7 @@
   },
   "ArtDesign": {
     "assistant_role_name": "Programmer",
-    "user_role_name": "Chief Creative Officer",
+    "user_role_name": "Reviewer",
     "phase_prompt": [
       "Our developed source codes and corresponding test reports are listed below: ",
       "Task: \"{task}\".",
@@ -84,7 +84,7 @@
   },
   "ArtIntegration": {
     "assistant_role_name": "Programmer",
-    "user_role_name": "Chief Creative Officer",
+    "user_role_name": "Reviewer",
     "phase_prompt": [
       "Our developed source codes and corresponding test reports are listed below: ",
       "Task: \"{task}\".",
@@ -110,7 +110,7 @@
   },
   "CodeComplete": {
     "assistant_role_name": "Programmer",
-    "user_role_name": "Chief Technology Officer",
+    "user_role_name": "Test Engineer",
     "phase_prompt": [
       "According to the new user's task and our software designs listed below: ",
       "Task: \"{task}\".",
@@ -119,8 +119,8 @@
       "Codes:",
       "\"{codes}\"",
       "Unimplemented File:",
-      "\"{unimplemented_file}\"",
-      "In our software, each file must strictly follow a markdown code block format, where the following tokens must be replaced such that \"FILENAME\" is the lowercase file name including the file extension, \"LANGUAGE\" in the programming language, \"DOCSTRING\" is a string literal specified in source code that is used to document a specific segment of code, and \"CODE\" is the original code:",
+      "\"{unimplemented}\"",
+      "We have completed the majority of our project, but we are still missing one file mentioned above. As the {assistant_role}, please write the content of this file according to the existing codebase and strictly follow the format below:",
       "FILENAME",
       "```LANGUAGE",
       "'''",
@@ -128,11 +128,11 @@
       "'''",
       "CODE",
       "```",
-      "As the {assistant_role}, to satisfy the complete function of our developed software, you have to implement all methods in the {unimplemented_file} file which contains a unimplemented class. Now, implement all methods of the {unimplemented_file} and all other codes needed, then output the fully implemented codes, strictly following the required format."
+      "Ensure your implementation is functional and integrates seamlessly with the existing files."
     ]
   },
   "CodeReviewComment": {
-    "assistant_role_name": "Code Reviewer",
+    "assistant_role_name": "Reviewer",
     "user_role_name": "Programmer",
     "phase_prompt": [
       "According to the new user's task and our software designs: ",
@@ -154,7 +154,7 @@
   },
   "CodeReviewModification": {
     "assistant_role_name": "Programmer",
-    "user_role_name": "Code Reviewer",
+    "user_role_name": "Reviewer",
     "phase_prompt": [
       "According to the new user's task, our designed product modality, languages and ideas, our developed first-edition source codes are listed below: ",
       "Task: \"{task}\".",
@@ -178,7 +178,7 @@
   },
   "TestErrorSummary": {
     "assistant_role_name": "Programmer",
-    "user_role_name": "Software Test Engineer",
+    "user_role_name": "Test Engineer",
     "phase_prompt": [
       "Our developed source codes and corresponding test reports are listed below: ",
       "Programming Language: \"{language}\"",
@@ -191,7 +191,7 @@
   },
   "TestModification": {
     "assistant_role_name": "Programmer",
-    "user_role_name": "Software Test Engineer",
+    "user_role_name": "Test Engineer",
     "phase_prompt": [
       "Our developed source codes and corresponding test reports are listed below: ",
       "Programming Language: \"{language}\"",
@@ -214,7 +214,7 @@
   },
   "EnvironmentDoc": {
     "assistant_role_name": "Programmer",
-    "user_role_name": "Chief Technology Officer",
+    "user_role_name": "Team Lead",
     "phase_prompt": [
       "The new user's task and our developed codes are listed: ",
       "Task: \"{task}\".",
@@ -233,8 +233,8 @@
     ]
   },
   "Manual": {
-    "assistant_role_name": "Chief Product Officer",
-    "user_role_name": "Chief Executive Officer",
+    "assistant_role_name": "Team Lead",
+    "user_role_name": "Product Manager",
     "phase_prompt": [
       "The new user's task, our developed codes and required dependencies are listed: ",
       "Task: \"{task}\".",
@@ -276,3 +276,4 @@
     ]
   }
 }
+
