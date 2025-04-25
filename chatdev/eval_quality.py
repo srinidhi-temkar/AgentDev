@@ -5,6 +5,8 @@ import subprocess
 import time
 import numpy as np
 from openai import OpenAI
+import ollama
+
 
 client = OpenAI(
     api_key='',
@@ -134,14 +136,34 @@ def get_consistency(directory):
     def get_text_embedding(text: str):
         if text == "":
             text = "None"
-        ada_embedding = client.embeddings.create(input=text, model="text-embedding-ada-002").model_dump()['data'][0]['embedding']
-        return ada_embedding
+        response = ollama.embed(
+            model='mxbai-embed-large',
+            input=text
+        )
+        return response["embeddings"][0]
 
     def get_code_embedding(code: str):
         if code == "":
             code = "#"
-        ada_embedding = client.embeddings.create(input=code, model="text-embedding-ada-002").model_dump()['data'][0]['embedding']
-        return ada_embedding
+        response = ollama.embed(
+            model='mxbai-embed-large',
+            input=code
+        )
+        return response["embeddings"][0]
+
+    # def get_text_embedding(text: str):
+    #     if text == "":
+    #         text = "None"
+    #     return get_embedding_ollama(text)
+    #     ada_embedding = client.embeddings.create(input=text, model="text-embedding-ada-002").model_dump()['data'][0]['embedding']
+    #     return ada_embedding
+    #
+    # def get_code_embedding(code: str):
+    #     if code == "":
+    #         code = "#"
+    #     return get_embedding_ollama(code)
+    #     ada_embedding = client.embeddings.create(input=code, model="text-embedding-ada-002").model_dump()['data'][0]['embedding']
+    #     return ada_embedding
 
     def get_cosine_similarity(embeddingi, embeddingj):
         embeddingi = np.array(embeddingi)
@@ -189,11 +211,15 @@ def main(warehouse_root):
             completeness = get_completeness(directory)
             executability = get_executability(directory)
             consistency = get_consistency(directory)
+            quality = completeness*executability*consistency
 
             completeness_list.append(completeness)
             executability_list.append(executability)
             consistency_list.append(consistency)
 
+            write_string(f'{directory_basename}:\t\t{completeness}\t\t{executability}\t\t{consistency}\t\t{quality}\n')
+
             counter += 1
 
-main(warehouse_root = "./WareHouse")
+
+main(warehouse_root = "../NewWarehouse")
