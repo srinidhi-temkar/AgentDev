@@ -97,7 +97,7 @@ class ChatAgent(BaseAgent):
         self.role_name: str = system_message.role_name
         self.role_type: RoleType = system_message.role_type
         # self.model: ModelType = (model if model is not None else ModelType.GPT_3_5_TURBO)
-        self.model: ModelType = ModelType.CUSTOM_FT_MODEL if self.role_name == 'Code Reviewer' else ModelType.CUSTOM_BASE_MODEL
+        self.model: ModelType = ModelType.CUSTOM_FT_MODEL if self.role_name == 'Debugger' else ModelType.CUSTOM_BASE_MODEL
         self.model_config: ChatGPTConfig = model_config or ChatGPTConfig()
         self.model_token_limit: int = get_model_token_limit(self.model)
         self.message_window_size: Optional[int] = message_window_size
@@ -237,7 +237,7 @@ class ChatAgent(BaseAgent):
         info: Dict[str, Any]
 
         if num_tokens < self.model_token_limit:
-            base_url_name = "FT_BASE_URL" if self.role_name == 'Code Reviewer' else "BASE_BASE_URL"
+            base_url_name = "FT_BASE_URL" if self.role_name == 'Debugger' else "BASE_BASE_URL"
             response = self.model_backend.run(messages=openai_messages, base_url_name=base_url_name)
             if openai_new_api:
                 if not isinstance(response, ChatCompletion):

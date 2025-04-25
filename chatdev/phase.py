@@ -37,7 +37,7 @@ class Phase(ABC):
         self.phase_name = phase_name
         self.assistant_role_prompt = role_prompts[assistant_role_name]
         self.user_role_prompt = role_prompts[user_role_name]
-        self.ceo_prompt = role_prompts["Chief Executive Officer"]
+        self.ceo_prompt = role_prompts["Product Manager"]
         self.counselor_prompt = role_prompts["Counselor"]
         self.max_retries = 3
         self.reflection_prompt = """Here is a conversation between two roles: {conversations} {question}"""
@@ -221,7 +221,7 @@ class Phase(ABC):
         reflected_content = \
             self.chatting(chat_env=chat_env,
                           task_prompt=task_prompt,
-                          assistant_role_name="Chief Executive Officer",
+                          assistant_role_name="Product Manager",
                           user_role_name="Counselor",
                           phase_prompt=self.reflection_prompt,
                           phase_name="Reflection",

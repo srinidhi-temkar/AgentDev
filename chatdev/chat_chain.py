@@ -333,13 +333,14 @@ class ChatChain:
             revised_task_prompt: revised prompt from the prompt engineer agent
 
         """
-        self_task_improve_prompt = """I will give you a short description of a software design requirement, 
-please rewrite it into a detailed prompt that can make large language model know how to make this software better based this prompt,
-the prompt should ensure LLMs build a software that can be run correctly, which is the most import part you need to consider.
-remember that the revised prompt should not contain more than 200 words, 
-here is the short description:\"{}\". 
-If the revised prompt is revised_version_of_the_description, 
-then you should return a message in a format like \"<INFO> revised_version_of_the_description\", do not return messages in other formats.""".format(
+        self_task_improve_prompt = """I will give you a short description of a software design requirement. \
+Please rewrite it into a detailed prompt that can make an LLM better understand how to make this software. 
+The prompt should ensure LLMs build a software that can be run correctly, which is the most import part you need to consider. \
+Remember that the revised prompt should not contain more than 100 words. 
+Here is the short description:\"{}\". 
+Let's say the revised prompt you give is called revised_version_of_the_description, \
+then you should return a message in a format like \"<INFO> revised_version_of_the_description\". 
+Do not return messages in other formats.""".format(
             task_prompt)
         role_play_session = RolePlaying(
             assistant_role_name="Prompt Engineer",
@@ -358,6 +359,8 @@ then you should return a message in a format like \"<INFO> revised_version_of_th
         _, input_user_msg = role_play_session.init_chat(None, None, self_task_improve_prompt)
         assistant_response, user_response = role_play_session.step(input_user_msg, True)
         revised_task_prompt = assistant_response.msg.content.split("<INFO>")[-1].lower().strip()
+        if revised_task_prompt == "":
+            revised_task_prompt = task_prompt
         log_visualize(role_play_session.assistant_agent.role_name, assistant_response.msg.content)
         log_visualize(
             "**[Task Prompt Self Improvement]**\n**Original Task Prompt**: {}\n**Improved Task Prompt**: {}".format(
