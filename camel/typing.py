@@ -55,7 +55,8 @@ class ModelType(Enum):
     GPT_4_TURBO_V = "gpt-4-turbo"
     GPT_4O = "gpt-4o"
     GPT_4O_MINI = "gpt-4o-mini"
-    CUSTOM_MODEL = os.getenv("MODEL_NAME")
+    CUSTOM_BASE_MODEL = os.getenv("BASE_MODEL_NAME")
+    CUSTOM_FT_MODEL = os.getenv("FT_MODEL_NAME")
 
     STUB = "stub"
 

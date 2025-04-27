@@ -34,7 +34,7 @@ class Experience:
         self.experiences = []
 
         # self.model = OpenAIModel(model_type="gpt-3.5-turbo-16k")
-        self.model = OpenAIModel(model_type=os.getenv("MODEL_NAME"))
+        self.model = OpenAIModel(model_type=os.getenv("BASE_MODEL_NAME"))
         self.embedding_method = OpenAIEmbedding()
 
         for edge in self.graph.edges:

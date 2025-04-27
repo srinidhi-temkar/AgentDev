@@ -36,10 +36,6 @@ except ImportError:
 import os
 
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
-if 'BASE_URL' in os.environ:
-    BASE_URL = os.environ['BASE_URL']
-else:
-    BASE_URL = None
 
 
 class ModelBackend(ABC):
@@ -69,6 +65,7 @@ class OpenAIModel(ModelBackend):
         self.model_config_dict = model_config_dict
 
     def run(self, *args, **kwargs):
+        BASE_URL = os.environ[kwargs["base_url_name"]]
         string = "\n".join([message["content"] for message in kwargs["messages"]])
         # encoding = tiktoken.encoding_for_model(self.model_type.value)
         encoding = tiktoken.get_encoding("cl100k_base")
@@ -99,7 +96,8 @@ class OpenAIModel(ModelBackend):
                 "gpt-4-turbo": 100000,
                 "gpt-4o": 4096, #100000
                 "gpt-4o-mini": 16384, #100000,
-                os.getenv("MODEL_NAME"): int(os.getenv("MODEL_OUTPUT_TOKENS")),
+                os.getenv("BASE_MODEL_NAME"): int(os.getenv("MODEL_OUTPUT_TOKENS")),
+                os.getenv("FT_MODEL_NAME"): int(os.getenv("MODEL_OUTPUT_TOKENS")),
             }
             num_max_token = num_max_token_map[self.model_type.value]
             num_max_completion_tokens = num_max_token - num_prompt_tokens
@@ -133,7 +131,8 @@ class OpenAIModel(ModelBackend):
                 "gpt-4-turbo": 100000,
                 "gpt-4o": 4096, #100000
                 "gpt-4o-mini": 16384, #100000,
-                os.getenv("MODEL_NAME"): int(os.getenv("MODEL_OUTPUT_TOKENS")),
+                os.getenv("BASE_MODEL_NAME"): int(os.getenv("MODEL_OUTPUT_TOKENS")),
+                os.getenv("FT_MODEL_NAME"): int(os.getenv("MODEL_OUTPUT_TOKENS")),
             }
             num_max_token = num_max_token_map[self.model_type.value]
             num_max_completion_tokens = num_max_token - num_prompt_tokens
@@ -196,7 +195,8 @@ class ModelFactory:
             ModelType.GPT_4_TURBO_V,
             ModelType.GPT_4O,
             ModelType.GPT_4O_MINI,
-            ModelType.CUSTOM_MODEL,
+            ModelType.CUSTOM_BASE_MODEL,
+            ModelType.CUSTOM_FT_MODEL,
             None
         }:
             model_class = OpenAIModel

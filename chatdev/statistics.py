@@ -19,7 +19,8 @@ def prompt_cost(model_type: str, num_prompt_tokens: float, num_completion_tokens
         "gpt-4-turbo": 0.01,
         "gpt-4o": 0.005,
         "gpt-4o-mini": 0.00015,
-        os.getenv("MODEL_NAME"): float(os.getenv("MODEL_COST")),
+        os.getenv("BASE_MODEL_NAME"): float(os.getenv("MODEL_COST")),
+        os.getenv("FT_MODEL_NAME"): float(os.getenv("MODEL_COST")),
     }
 
     output_cost_map = {
@@ -33,7 +34,8 @@ def prompt_cost(model_type: str, num_prompt_tokens: float, num_completion_tokens
         "gpt-4-turbo": 0.03,
         "gpt-4o": 0.015,
         "gpt-4o-mini": 0.0006,
-        os.getenv("MODEL_NAME"): float(os.getenv("MODEL_COST")),
+        os.getenv("BASE_MODEL_NAME"): float(os.getenv("MODEL_COST")),
+        os.getenv("FT_MODEL_NAME"): float(os.getenv("MODEL_COST")),
     }
 
     if model_type not in input_cost_map or model_type not in output_cost_map:
@@ -125,8 +127,10 @@ def get_info(dir, log_filepath):
                 model_type = "gpt-4o"
             elif model_type == "GPT_4O_MINI":
                 model_type = "gpt-4o-mini"
-            elif model_type == "CUSTOM_MODEL":
-                model_type = os.getenv("MODEL_NAME")
+            elif model_type == "CUSTOM_BASE_MODEL":
+                model_type = os.getenv("BASE_MODEL_NAME")
+            elif model_type == "CUSTOM_FT_MODEL":
+                model_type = os.getenv("FT_MODEL_NAME")
             # print("model_type:", model_type)
 
         lines = open(log_filepath, "r", encoding="utf8").read().split("\n")

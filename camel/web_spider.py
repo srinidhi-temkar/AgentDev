@@ -10,7 +10,7 @@ import time
 load_dotenv()
 
 self_api_key = os.environ.get('OPENAI_API_KEY')
-BASE_URL = os.environ.get('BASE_URL')
+BASE_URL = os.environ.get('BASE_BASE_URL')
 
 if BASE_URL:
     client = openai.OpenAI(
@@ -62,7 +62,7 @@ def modal_trans(task_dsp):
         messages = [{"role": "user", "content": task_in}]
         response = client.chat.completions.create(messages=messages,
         # model="gpt-3.5-turbo-16k",
-        model=os.getenv("MODEL_NAME"),
+        model=os.getenv("BASE_MODEL_NAME"),
         temperature=0.2,
         top_p=1.0,
         n=1,
@@ -78,7 +78,7 @@ def modal_trans(task_dsp):
         messages = [{"role": "user", "content": task_in}]
         response = client.chat.completions.create(messages=messages,
         # model="gpt-3.5-turbo-16k",
-        model=os.getenv("MODEL_NAME"),
+        model=os.getenv("BASE_MODEL_NAME"),
         temperature=0.2,
         top_p=1.0,
         n=1,
